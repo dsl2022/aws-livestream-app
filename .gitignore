@@ -1,0 +1,32 @@
+# Node.js specific
+node_modules/
+npm-debug.log
+npm-debug.log.*
+yarn-error.log
+.yarn-integrity
+.env
+.env.local
+.env.*.local
+.cache
+.next
+dist/
+build/
+coverage/
+
+# Terraform specific
+*.tfstate
+*.tfstate.*.backup
+*.tfstate.backup
+*.tfvars
+.terraform/
+.terraform.lock.hcl
+terraform.tfvars
+terraform.tfvars.json
+crash.log
+
+# General files to ignore
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.temp
