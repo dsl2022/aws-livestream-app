@@ -1,7 +1,7 @@
 
 # IAM Roles
 resource "aws_iam_role" "authenticated_role" {
-  name = "Cognito_ExampleAuthenticatedRole"
+  name = "Cognito_IvsAppAuthenticatedRole"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -24,7 +24,7 @@ resource "aws_iam_role" "authenticated_role" {
 }
 
 resource "aws_iam_role" "unauthenticated_role" {
-  name = "Cognito_ExampleUnauthenticatedRole"
+  name = "Cognito_IvsAppUnauthenticatedRole"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
