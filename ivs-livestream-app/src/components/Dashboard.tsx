@@ -5,14 +5,14 @@ import CameraStream from '../components/VideoCapture'
 import { BroadcastProvider } from '../context/BroadcastContext';
 import BroadcastLayout from '../components/BroadcastLayout'
 const Dashboard:React.FC=()=>{
-    const ingestEndpoint = 'd948407a7e1a.global-contribute.live-video.net';
-    const streamKey = 'sk_us-east-1_rFTuzPgG7W7H_CRWJAREMmeatTTZJvGVRLteReNh4G9';
+    const ingestEndpoint = process.env.REACT_APP_INGEST_ENDPOINT;
+    const streamKey = process.env.REACT_APP_STREAM_KEY;
     return <>
     <div>
     <h1>Video Player</h1>
     {/* <HLSVideoPlayer url={videoUrl} /> */}
     <BroadcastProvider>
-      <BroadcastLayout ingestEndpoint={ingestEndpoint} streamKey={streamKey} />
+      {ingestEndpoint&&streamKey&&<BroadcastLayout ingestEndpoint={ingestEndpoint} streamKey={streamKey} />}
     </BroadcastProvider>
   </div>
   </>
