@@ -38,4 +38,6 @@ async function listStreams(): Promise<Array<StreamSummary>> {
   return streams.map((stream) => ({ id: stream.channelArn as string }));
 }
 
+
+
 export { getStream, listStreams };
