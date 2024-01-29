@@ -38,3 +38,27 @@ resource "aws_iam_role_policy_attachment" "ivs_policy_attachment_auth" {
 # }
 
 # ... [Rest of the Previous Resources] ...
+resource "aws_s3_bucket_policy" "allow_cloudfront" {
+  bucket = aws_s3_bucket.ivs_app.id
+
+  policy = jsonencode({
+    Version = "2008-10-17",
+    Id      = "PolicyForCloudFrontPrivateContent",
+    Statement = [
+      {
+        Sid       = "AllowCloudFrontServicePrincipal",
+        Effect    = "Allow",
+        Principal = {
+          Service = "cloudfront.amazonaws.com"
+        },
+        Action   = "s3:GetObject",
+        Resource = "arn:aws:s3:::${aws_s3_bucket.ivs_app.bucket}/*",
+        Condition = {
+          StringEquals = {
+            "AWS:SourceArn" = "arn:aws:cloudfront::YOUR_AWS_ACCOUNT_ID:distribution/${aws_cloudfront_distribution.web_distribution.id}"
+          }
+        }
+      }
+    ]
+  })
+}

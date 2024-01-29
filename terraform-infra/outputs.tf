@@ -23,3 +23,7 @@ output "stream_key" {
 output "playback_url" {
   value = aws_ivs_channel.ivs_app.playback_url
 }
+
+output "bucketname" {
+  value = aws_s3_bucket.ivs_app.bucket_domain_name
+}

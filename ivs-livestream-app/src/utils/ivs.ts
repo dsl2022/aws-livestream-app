@@ -4,7 +4,8 @@ import { IvsClient } from "@aws-sdk/client-ivs";
 import { GetStreamCommand, ListStreamsCommand } from "@aws-sdk/client-ivs";
 import {getCredentials} from "../auth";
 import { Stream, StreamSummary } from "../types";
-
+import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
+import { fromCognitoIdentityPool } from "@aws-sdk/credential-provider-cognito-identity";
 let ivsClient: IvsClient;
 
 async function getIVSClient() {
@@ -14,13 +15,23 @@ async function getIVSClient() {
 
   const region = "us-east-1";
   const idToken = localStorage.getItem('idToken');
+  const identityPoolId:string = process.env.REACT_APP_COGNITO_IDENTITY_POOL_ID as string
+  const userPoolId:string = process.env.REACT_APP_COGNITO_USER_POOL_ID as string
+  console.log("identity pool id",identityPoolId,"idToken",idToken)
 if (!idToken) {
   // Use idToken to authenticate with Cognito Identity Pool or make requests to IVS
   throw new Error("idToken is not defined"); 
 }
-  const credentials = await getCredentials(region,idToken);
-  ivsClient = new IvsClient({ region, credentials });
-
+const credentials = fromCognitoIdentityPool({
+  client: new CognitoIdentityClient({ region }),
+  identityPoolId,
+  logins: {
+    // Replace the key with your Cognito User Pool URL
+    [`cognito-idp.${region}.amazonaws.com/${userPoolId}`]: idToken,
+  },
+});
+  ivsClient = new IvsClient({ region, credentials: await credentials()  });
+  console.log({credentials: await credentials() })
   return ivsClient;
 }
 
@@ -35,6 +46,7 @@ async function listStreams(): Promise<Array<StreamSummary>> {
   const client = await getIVSClient();
   const listStreamsCommand = new ListStreamsCommand({});
   const { streams = [] } = await client.send(listStreamsCommand);
+  console.log({streams})
   return streams.map((stream) => ({ id: stream.channelArn as string }));
 }
 

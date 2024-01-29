@@ -1,21 +1,32 @@
-import React from "react"
-import HLSVideoPlayer from "./HLSPlayer"
-import { VideoCapture } from "aws-sdk/clients/devicefarm";
-import CameraStream from '../components/VideoCapture'
-import { BroadcastProvider } from '../context/BroadcastContext';
-import BroadcastLayout from '../components/BroadcastLayout'
+
+import React,{useState} from 'react';
+import { BroadcastClientProvider } from '../context/BroadcastClientContext';
+import StreamPreview from './StreamPreview';
+import StreamManager from './StreamManager';
+import StartStopButton from './StartStopButton';
+import DeviceSelector from './DeviceSelectior';
+import RealTimePlayBack from './RealtimePlayback'
 const Dashboard:React.FC=()=>{
     const ingestEndpoint = process.env.REACT_APP_INGEST_ENDPOINT;
     const streamKey = process.env.REACT_APP_STREAM_KEY;
-    return <>
-    <div>
-    <h1>Video Player</h1>
-    {/* <HLSVideoPlayer url={videoUrl} /> */}
-    <BroadcastProvider>
-      {ingestEndpoint&&streamKey&&<BroadcastLayout ingestEndpoint={ingestEndpoint} streamKey={streamKey} />}
-    </BroadcastProvider>
-  </div>
-  </>
+    const [isPreviewOn, setIsPreviewOn] = useState(true);
+
+    const togglePreview = () => {
+      setIsPreviewOn(!isPreviewOn);
+    };
+    return (
+        <BroadcastClientProvider>
+          <StreamPreview isPreviewOn={isPreviewOn} />
+          <StreamManager isPreviewOn={isPreviewOn} />
+          <DeviceSelector type="video" />
+          <DeviceSelector type="audio" />
+          {streamKey&&<StartStopButton streamKey={streamKey} />}
+          <button onClick={togglePreview}>
+            {isPreviewOn ? 'Hide' : 'Show'} Preview
+          </button>
+          <RealTimePlayBack/>
+        </BroadcastClientProvider>
+      );
 }
 
 export default Dashboard
