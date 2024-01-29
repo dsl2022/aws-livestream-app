@@ -1,4 +1,4 @@
-name: Chat app build and deploy
+name: IVS livestream app build and deploy
 on:
   workflow_dispatch:
     inputs:
