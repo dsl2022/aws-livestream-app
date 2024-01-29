@@ -1,6 +1,6 @@
 # hls serving cloudfront 
 
-resource "aws_cloudfront_distribution" "web_distribution" {
+resource "aws_cloudfront_distribution" "web_distribution_ivs_serve" {
   enabled             = true
   is_ipv6_enabled     = true
   http_version        = "http2"
@@ -69,7 +69,7 @@ resource "aws_s3_bucket_website_configuration" "web_bucket_website" {
   }
 }
 
-resource "aws_cloudfront_distribution" "web_distribution" {
+resource "aws_cloudfront_distribution" "web_distribution_ivs_app" {
   enabled             = true
   is_ipv6_enabled     = true
   http_version        = "http2"
