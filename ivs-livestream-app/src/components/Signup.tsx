@@ -26,7 +26,7 @@ const SignUp: React.FC = () => {
         setError(err.message || JSON.stringify(err));
         return;
       }
-      console.log('User signed up', result);
+      console.log('User signed up');
       // Handle post sign-up actions here (e.g., confirmation code step)
     });
   };

@@ -16,8 +16,7 @@ async function getIVSClient() {
   const region = "us-east-1";
   const idToken = localStorage.getItem('idToken');
   const identityPoolId:string = process.env.REACT_APP_COGNITO_IDENTITY_POOL_ID as string
-  const userPoolId:string = process.env.REACT_APP_COGNITO_USER_POOL_ID as string
-  console.log("identity pool id",identityPoolId,"idToken",idToken)
+  const userPoolId:string = process.env.REACT_APP_COGNITO_USER_POOL_ID as string  
 if (!idToken) {
   // Use idToken to authenticate with Cognito Identity Pool or make requests to IVS
   throw new Error("idToken is not defined"); 
@@ -30,8 +29,7 @@ const credentials = fromCognitoIdentityPool({
     [`cognito-idp.${region}.amazonaws.com/${userPoolId}`]: idToken,
   },
 });
-  ivsClient = new IvsClient({ region, credentials: await credentials()  });
-  console.log({credentials: await credentials() })
+  ivsClient = new IvsClient({ region, credentials: await credentials()  });  
   return ivsClient;
 }
 

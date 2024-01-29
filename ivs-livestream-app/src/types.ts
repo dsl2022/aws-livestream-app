@@ -52,7 +52,8 @@ interface Player {
   // Adds event listeners to the Player object
   // (not the underlying <video> element)
   addEventListener(name: PlayerEvents, callback: (args: any) => void): void;
-
+  setAutoplay: (autoplay: boolean) => void;
+  setVolume: (volume: number) => void;
   // Returns the underlying <video> element for any DOM manupilation
   // or DOM event handling
   getHTMLVideoElement(): HTMLVideoElement;

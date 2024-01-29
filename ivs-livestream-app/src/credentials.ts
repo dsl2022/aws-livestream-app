@@ -13,7 +13,6 @@ async function getCredentials(region: string): Promise<CredentialProvider> {
     IdentityPoolId: `${region}:d708309a-dcdd-4d30-bc9c-c863d8e1cc8e`,
   });
   const { IdentityId = "" } = await cognitoClient.send(getIdentityId);
-  console.log({IdentityId})
   const getOpenIdToken = new GetOpenIdTokenCommand({ IdentityId });
   const { Token = "" } = await cognitoClient.send(getOpenIdToken);
 

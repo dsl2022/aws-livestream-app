@@ -27,7 +27,7 @@ const Login: React.FC = () => {
 
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: (session) => {
-        console.log('Login successful', session);
+        console.log('Login successful');
         localStorage.setItem('idToken', session.getIdToken().getJwtToken());
         localStorage.setItem('accessToken', session.getAccessToken().getJwtToken());
         localStorage.setItem('refreshToken', session.getRefreshToken().getToken());        
