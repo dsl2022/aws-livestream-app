@@ -15,7 +15,6 @@ const Login: React.FC = () => {
 
   const handleLogin = (event: React.FormEvent) => {
     event.preventDefault();
-
     const authenticationDetails = new AuthenticationDetails({
       Username: username,
       Password: password,
@@ -38,14 +37,11 @@ const Login: React.FC = () => {
       onFailure: (err) => {
         if (err.code === 'UserNotConfirmedException') {
             setIsUnConfirmed(true)
-          // Redirect to ConfirmSignup component, pass the username
-          // You might want to use React Router's navigate or history.push here
           console.log('User is not confirmed');
         } else {
           setError(err.message || JSON.stringify(err));
         }
-      },
-      // Optionally add the newPasswordRequired callback here if needed
+      },      
     });
   };
 
