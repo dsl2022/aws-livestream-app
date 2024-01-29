@@ -115,6 +115,4 @@ resource "aws_cloudfront_origin_access_identity" "web_identity" {
   comment = "Access Identity for CloudFront"
 }
 
-output "cloudfront_domain_name" {
-  value = aws_cloudfront_distribution.web_distribution.domain_name
-}
+
