@@ -44,7 +44,6 @@ async function listStreams(): Promise<Array<StreamSummary>> {
   const client = await getIVSClient();
   const listStreamsCommand = new ListStreamsCommand({});
   const { streams = [] } = await client.send(listStreamsCommand);
-  console.log({streams})
   return streams.map((stream) => ({ id: stream.channelArn as string }));
 }
 

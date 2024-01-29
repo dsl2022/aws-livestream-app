@@ -5,6 +5,7 @@ import SignUp from './components/Signup';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import { useAuth } from './context/AuthContext'; // Import the useAuth hook
+import ConfirmSignup from './components/ConfirmSignup';
 
 function App() {
   const { isLoggedIn, logout } = useAuth(); // Use the isLoggedIn state and logout function
@@ -23,12 +24,12 @@ function App() {
                 <Link to="/" onClick={logout}>Logout</Link>
               </li>
             )}
-            <li>
+            {!isLoggedIn && <li>
               <Link to="/signup">Sign Up</Link>
-            </li>
-            <li>
-              {isLoggedIn && <Link to="/dashboard">Dashboard</Link>}
-            </li>
+            </li>}
+            {isLoggedIn && <li>
+               <Link to="/dashboard">Dashboard</Link>
+            </li>}
           </ul>
         </nav>
 
@@ -36,8 +37,8 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />  
-          {/* <Route path="/confirm-signup" element={<ConfirmSignup />} /> */}
-          <Route path="/" element={<div>Home Page</div>} /> {/* Optional: Home page or Redirect */}
+          <Route path="/confirm-signup" element={<ConfirmSignup />} />
+          <Route path="/" element={<div>IVS livestream app</div>} /> {/* Optional: Home page or Redirect */}
         </Routes>
       </div>
     </Router>
