@@ -2,7 +2,7 @@
 
 # IAM Policy for IVS Access (Modify as needed)
 resource "aws_iam_policy" "ivs_policy" {
-  name        = "IVSAccessPolicy"
+  name        = "IVSAppAccessPolicy"
   description = "Policy for accessing IVS resources"
 
   policy = jsonencode({

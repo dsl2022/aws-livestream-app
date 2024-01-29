@@ -53,7 +53,7 @@ jobs:
             -backend-config='skip_credentials_validation=true' \
             -backend-config='region=${{ inputs.aws_region }}' \
             -backend-config='bucket=${{ inputs.backend_s3_bucket }}' \
-            -backend-config='key=ivs-livestream-app/terraform-${{ env.ECR_REPO_NAME }}.tfstate' \
+            -backend-config='key=ivs-livestream-app/terraform-ivs-livestream-app.tfstate' \
             -backend-config='dynamodb_table=${{ inputs.backend_dynamodb_table }}'            
         working-directory: terraform-infra
 

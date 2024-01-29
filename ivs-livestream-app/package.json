@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "react-scripts start",
-    "build": "parcel build index.html"
+    "build": "react-scripts build"
   },
   "dependencies": {
     "@aws-sdk/client-cognito-identity": "3.78.0",
