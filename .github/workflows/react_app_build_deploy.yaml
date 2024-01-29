@@ -27,9 +27,24 @@ jobs:
       run: npm install
       working-directory: ivs-livestream-app
     - name: Build React app
-      run: npm run build
+      run: |
+          REACT_APP_PLAYBACK_URL=${{ secrets.REACT_PLAYBACK_URL }} \
+          REACT_APP_INGEST_ENDPOINT=${{ secrets.REACT_APP_INGEST_ENDPOINT }} \
+          REACT_APP_AWS_REGION=${{ secrets.REACT_APP_AWS_REGION }} \
+          REACT_APP_COGNITO_CLIENT_ID=${{ secrets.REACT_APP_COGNITO_CLIENT_ID }} \
+          REACT_APP_COGNITO_IDENTITY_POOL_ID=${{ secrets.REACT_APP_COGNITO_IDENTITY_POOL_ID }} \
+          REACT_APP_COGNITO_USER_POOL_ID=${{ secrets.REACT_APP_COGNITO_USER_POOL_ID }} \
+          REACT_APP_STREAM_KEY=${{ secrets.REACT_APP_STREAM_KEY }} \
+          npm run build
       working-directory: ivs-livestream-app
-
+      env:
+        REACT_APP_PLAYBACK_URL: ${{ secrets.REACT_PLAYBACK_URL }}
+        REACT_APP_INGEST_ENDPOINT: ${{ secrets.REACT_APP_INGEST_ENDPOINT }}
+        REACT_APP_AWS_REGION: ${{ secrets.REACT_APP_AWS_REGION }}
+        REACT_APP_COGNITO_CLIENT_ID: ${{secrets.REACT_APP_COGNITO_CLIENT_ID}}
+        REACT_APP_COGNITO_IDENTITY_POOL_ID: ${{secrets.REACT_APP_COGNITO_IDENTITY_POOL_ID}}
+        REACT_APP_COGNITO_USER_POOL_ID: ${{secrets.REACT_APP_COGNITO_USER_POOL_ID}}
+        REACT_APP_STREAM_KEY: ${{secrets.REACT_APP_STREAM_KEY}}
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
