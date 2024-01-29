@@ -5,25 +5,25 @@ import StreamPreview from './StreamPreview';
 import StreamManager from './StreamManager';
 import StartStopButton from './StartStopButton';
 import DeviceSelector from './DeviceSelectior';
-import RealTimePlayBack from './RealtimePlayback'
+
 const Dashboard:React.FC=()=>{    
     const streamKey = process.env.REACT_APP_STREAM_KEY;
-    const [isPreviewOn, setIsPreviewOn] = useState(true);
+    const [isPreviewOn, setIsPreviewOn] = useState(false);
 
     const togglePreview = () => {
       setIsPreviewOn(!isPreviewOn);
     };
+
     return (
         <BroadcastClientProvider>
           <StreamPreview isPreviewOn={isPreviewOn} />
-          <StreamManager isPreviewOn={isPreviewOn} />
           <DeviceSelector type="video" />
           <DeviceSelector type="audio" />
+          <StreamManager isPreviewOn={isPreviewOn} />
           {streamKey&&<StartStopButton streamKey={streamKey} />}
           <button onClick={togglePreview}>
-            {isPreviewOn ? 'Hide' : 'Show'} Preview
-          </button>
-          <RealTimePlayBack/>
+            {isPreviewOn ? 'Turn off' : 'Turn on'} camera
+          </button>          
         </BroadcastClientProvider>
       );
 }

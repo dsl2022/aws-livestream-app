@@ -7,7 +7,8 @@ const StreamManager: React.FC<{ isPreviewOn: boolean }> = ({ isPreviewOn }) => {
   const { selectedVideoDevice, selectedAudioDevice } = usePermissions();
   const { videoDevices, audioDevices } = usePermissions();
   const [mediaStreams, setMediaStreams] = useState<MediaStream[]>([])
-    const stopMediaStreams = ()=>{
+  const stopMediaStreams = ()=>{
+      console.log("stop")
         mediaStreams.forEach(stream=>{
             stream.getTracks().forEach(track=> track.stop())
         })
@@ -19,7 +20,7 @@ const StreamManager: React.FC<{ isPreviewOn: boolean }> = ({ isPreviewOn }) => {
         try {
           // Generate unique names for devices
           const videoDeviceName = `videoDevice_${new Date().getTime()}`;
-          const audioDeviceName = `audioDevice_${new Date().getTime() + 1}`; // Offset by 1 ms to ensure uniqueness
+          const audioDeviceName = `audioDevice_${new Date().getTime() + 1}`; 
 
           const videoStream = await navigator.mediaDevices.getUserMedia({
             video: { deviceId: selectedVideoDevice || undefined },
@@ -38,21 +39,10 @@ const StreamManager: React.FC<{ isPreviewOn: boolean }> = ({ isPreviewOn }) => {
     };
     if (!isPreviewOn) {
         stopMediaStreams();
-      } else {
-        // Code to reinitialize streams if necessary
+      } else {        
         setupStreams();
-      }
-    return () => {
-        stopMediaStreams();
-      };
+      }   
   }, [client,isPreviewOn, selectedVideoDevice, selectedAudioDevice]);
-//   useEffect(() => {
-//     if (!isPreviewOn) {
-//       stopMediaStreams();
-//     } else {
-//       // Code to reinitialize streams if necessary
-//     }
-//   }, [isPreviewOn]);
   return <div />;
 };
 

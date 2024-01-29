@@ -2,13 +2,14 @@
 import React, { useState } from 'react';
 import { CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import awsConfig from '../awsConfig';
-
+import { useNavigate } from 'react-router-dom';
 const userPool = new CognitoUserPool({
   UserPoolId: awsConfig.userPoolId!,
   ClientId: awsConfig.userPoolWebClientId!,
 });
 
 const SignUp: React.FC = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -27,6 +28,7 @@ const SignUp: React.FC = () => {
         return;
       }
       console.log('User signed up');
+      navigate('/login');
       // Handle post sign-up actions here (e.g., confirmation code step)
     });
   };

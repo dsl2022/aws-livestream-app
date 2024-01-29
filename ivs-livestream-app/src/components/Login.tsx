@@ -5,8 +5,10 @@ import { userPool } from '../awsConfig'; // Adjust the import path as necessary
 import ConfirmSignup from './ConfirmSignup';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext'; 
+import { useUser } from '../context/UserContext'; 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { setUsername: setGlobalUsername } = useUser();
   const { login } = useAuth(); 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -37,6 +39,8 @@ const Login: React.FC = () => {
       onFailure: (err) => {
         if (err.code === 'UserNotConfirmedException') {
             setIsUnConfirmed(true)
+            setGlobalUsername(username);
+            navigate('/confirm-signup')
           console.log('User is not confirmed');
         } else {
           setError(err.message || JSON.stringify(err));
@@ -47,7 +51,7 @@ const Login: React.FC = () => {
 
   return (
     <div>
-      {isUnConfirmed?<ConfirmSignup username={username}/>:(<form onSubmit={handleLogin}>
+      {(<form onSubmit={handleLogin}>
         <input
           type="text"
           value={username}
