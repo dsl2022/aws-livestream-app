@@ -55,7 +55,7 @@ resource "aws_s3_bucket_policy" "allow_cloudfront" {
         Resource = "arn:aws:s3:::${aws_s3_bucket.ivs_app.bucket}/*",
         Condition = {
           StringEquals = {
-            "AWS:SourceArn" = "arn:aws:cloudfront::YOUR_AWS_ACCOUNT_ID:distribution/${aws_cloudfront_distribution.web_distribution.id}"
+            "AWS:SourceArn" = "arn:aws:cloudfront::${var.aws_account_id}:distribution/${aws_cloudfront_distribution.web_distribution.id}"
           }
         }
       }
