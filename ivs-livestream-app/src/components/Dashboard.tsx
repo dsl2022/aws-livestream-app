@@ -6,8 +6,7 @@ import StreamManager from './StreamManager';
 import StartStopButton from './StartStopButton';
 import DeviceSelector from './DeviceSelectior';
 import RealTimePlayBack from './RealtimePlayback'
-const Dashboard:React.FC=()=>{
-    const ingestEndpoint = process.env.REACT_APP_INGEST_ENDPOINT;
+const Dashboard:React.FC=()=>{    
     const streamKey = process.env.REACT_APP_STREAM_KEY;
     const [isPreviewOn, setIsPreviewOn] = useState(true);
 

@@ -9,7 +9,6 @@ interface DeviceSelectorProps {
 
 const DeviceSelector: React.FC<DeviceSelectorProps> = ({ type }) => {
   const { videoDevices, audioDevices, selectVideoDevice, selectAudioDevice } = usePermissions();
-
   const devices = type === 'video' ? videoDevices : audioDevices;
   const selectDevice = type === 'video' ? selectVideoDevice : selectAudioDevice;
 
