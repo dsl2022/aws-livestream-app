@@ -4,12 +4,13 @@ import SignUp from './components/Signup';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import ConfirmSignup from './components/ConfirmSignup';
-import { useAuth } from './context/AuthContext'; // Import the useAuth hook
+import { useAuth } from './context/AuthContext'; 
+import LandingPage from './components/LandingPage';
+import PrivateRoute from './components/PrivateRoute';
 // Import SVGs and other assets here if necessary
 
 function App() {
-  const { isLoggedIn, logout } = useAuth(); // Use the isLoggedIn state and logout function
-
+  const { isLoggedIn, logout } = useAuth(); // Use the isLoggedIn state and logout function  
   return (
     <Router>
       <div className="App">
@@ -39,9 +40,11 @@ function App() {
         <Routes>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />  
+          <Route element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />           
+          </Route>
           <Route path="/confirm-signup" element={<ConfirmSignup />} />
-          <Route path="/" element={<div>IVS livestream app</div>} /> {/* Optional: Home page or Redirect */}
+          <Route path="/" element={<LandingPage/>} />
         </Routes>
       </div>
     </Router>

@@ -1,9 +1,8 @@
-// src/context/AuthContext.tsx
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 
 interface AuthContextType {
   isLoggedIn: boolean;
-  login: () => void;
+  login: (idToken: string, accessToken: string) => void;
   logout: () => void;
 }
 
@@ -22,20 +21,31 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // Initialize isLoggedIn based on the presence of an idToken in localStorage
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+    const idToken = localStorage.getItem('idToken');
+    return !!idToken; // Convert to boolean: true if idToken exists, otherwise false
+  });
 
-  const login = () => {
+  // Define the login method
+  const login = (idToken: string, accessToken: string) => {
+    localStorage.setItem('idToken', idToken);
+    localStorage.setItem('accessToken', accessToken);
     setIsLoggedIn(true);
-    // Additional login logic here
   };
 
+  // Define the logout method
   const logout = () => {
     setIsLoggedIn(false);
     localStorage.removeItem('idToken');
     localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    // Additional logout logic here
   };
+
+  // Effect to handle the page refresh and check the authentication status
+  useEffect(() => {
+    const idToken = localStorage.getItem('idToken');
+    setIsLoggedIn(!!idToken);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout }}>

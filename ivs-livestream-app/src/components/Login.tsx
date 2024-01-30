@@ -30,10 +30,16 @@ const Login: React.FC = () => {
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: (session) => {
         console.log('Login successful');
-        localStorage.setItem('idToken', session.getIdToken().getJwtToken());
-        localStorage.setItem('accessToken', session.getAccessToken().getJwtToken());
-        localStorage.setItem('refreshToken', session.getRefreshToken().getToken());        
-        login();
+        const idToken = session.getIdToken().getJwtToken();
+        const accessToken = session.getAccessToken().getJwtToken();
+        const refreshToken = session.getRefreshToken().getToken();
+  
+        localStorage.setItem('idToken', idToken);
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);        
+  
+        // Now call login with the idToken and accessToken
+        login(idToken, accessToken); // Adjust this line
         navigate('/dashboard');
       },
       onFailure: (err) => {
