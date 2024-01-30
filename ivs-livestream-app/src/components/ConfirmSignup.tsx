@@ -32,17 +32,29 @@ const ConfirmSignup: React.FC = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          placeholder="Confirmation Code"
-        />
-        <button type="submit">Confirm</button>
-      </form>
-      {error && <p>Error: {error}</p>}
+    <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
+      <div className="max-w-md w-full bg-white rounded p-8 shadow-md">
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="confirmationCode" className="sr-only">Confirmation Code</label>
+            <input
+              id="confirmationCode"
+              type="text"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              placeholder="Confirmation Code"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            />
+          </div>
+          <button 
+            type="submit" 
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Confirm
+          </button>
+        </form>
+        {error && <p className="mt-3 text-center text-sm text-red-600">{error}</p>}
+      </div>
     </div>
   );
 };

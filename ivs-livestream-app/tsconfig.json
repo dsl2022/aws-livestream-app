@@ -1,18 +1,21 @@
 {
-    "compilerOptions": {
-      "allowSyntheticDefaultImports": true,
-      "strict": true,
-      "module": "ES2020",
-      "jsx": "react",
-      "esModuleInterop": true,
-      "sourceMap": true,
-      "allowJs": true,
-      "lib": [
-        "esnext",
-        "dom"
-      ],
-      "rootDir": "src",
-      "moduleResolution": "node",
-      "skipLibCheck": true
-    }
-  }
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "module": "ES2020",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "lib": ["esnext", "dom"],
+    "rootDir": "src",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "outDir": "./dist", 
+    "noEmitOnError": true
+  },
+  "exclude": [
+    "node_modules",
+    "build" 
+  ]
+}
