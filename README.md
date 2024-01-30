@@ -24,7 +24,7 @@ The application leverages device input and utilizes the [Amazon IVS Web Broadcas
 **Note:** This project's security and streaming are handled solely on the UI. This is not the optimal solution for production environments but is suitable for the project's educational nature.
 
 ## Deployed Demo
-The core functionality and infrastructure of the project are set up, although styling is pending. Access the demo at the CloudFront distribution URL: [IVS UI App Demo](d29gm9l5e6ckn5.cloudfront.net).
+The core functionality and infrastructure of the project are set up, although styling is pending. Access the demo at the CloudFront distribution URL: [IVS UI App Demo](https://d29gm9l5e6ckn5.cloudfront.net).
 
 To use the demo:
 - Register and confirm your account via email.
