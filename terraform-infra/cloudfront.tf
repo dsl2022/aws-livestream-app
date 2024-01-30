@@ -104,7 +104,11 @@ resource "aws_cloudfront_distribution" "web_distribution_ivs_app" {
       restriction_type = "none"
     }
   }
-
+  custom_error_response {
+    error_code         = 400
+    response_code      = 200
+    response_page_path = "/index.html"
+  }
   viewer_certificate {
     cloudfront_default_certificate = true
     ssl_support_method  = "sni-only"
