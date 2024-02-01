@@ -5,7 +5,7 @@ import { Player, PlayerEvents } from '../types';
 
 const RealTimePlayBack: React.FC = () => {
     const [tempUrl, setTempUrl] = useState<string>("");
-    const containerRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLVideoElement>(null);
     const [player, setPlayer] = useState<Player | null>(null);
     const [state, setState] = useState<string>("");
     const [health, setHealth] = useState<string>("");
@@ -61,7 +61,7 @@ const RealTimePlayBack: React.FC = () => {
         //     player?.removeEventListener(PlayerEvents.IDLE, onIdle);
         //     player?.removeEventListener(PlayerEvents.ERROR, onError);
         // };
-    }, [player]);
+    }, [player,player?.isPaused()]);
 
     const handlePlayer = () => {
         if (player) {
@@ -75,7 +75,7 @@ const RealTimePlayBack: React.FC = () => {
 
     return (
         <>
-            <div ref={containerRef} className='video-container' />
+            <video ref={containerRef} className="w-160 h-120 bg-black" />
             <div>{`state ${state}: viewCounter: ${viewerCount} health: ${health}`}</div>
             <button onClick={handlePlayer}>{isPlaying ? "Pause" : "Play"}</button>
         </>

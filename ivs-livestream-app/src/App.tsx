@@ -7,6 +7,7 @@ import ConfirmSignup from './components/ConfirmSignup';
 import { useAuth } from './context/AuthContext'; 
 import LandingPage from './components/LandingPage';
 import PrivateRoute from './components/PrivateRoute';
+import RealTimePlayBack from './components/RealtimePlayback';
 // Import SVGs and other assets here if necessary
 
 function App() {
@@ -42,6 +43,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />           
+          </Route>
+          <Route element={<PrivateRoute />}>
+            <Route path="/playback" element={<RealTimePlayBack />} />           
           </Route>
           <Route path="/confirm-signup" element={<ConfirmSignup />} />
           <Route path="/" element={<LandingPage/>} />

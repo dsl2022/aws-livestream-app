@@ -37,7 +37,6 @@ const StartStopButton: React.FC<StartStopButtonProps> = ({ streamKey }) => {
       <button disabled={isBroadcast} onClick={startBroadcast}>Start Broadcast</button>
       <button disabled={!isBroadcast} onClick={stopBroadcast}>Stop Broadcast</button>
       </div>
-      {isBroadcast&&<RealTimePlayBack />}
     </div>
   );
 };

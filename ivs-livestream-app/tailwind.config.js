@@ -5,7 +5,14 @@ module.exports = {
     // Add more paths if you have other file types, like HTML
   ],
   theme: {
-    extend: {},
+    extend: {
+      width: {
+        '160': '640px', // Custom width
+      },
+      height: {
+        '120': '480px', // Custom height
+      },
+    },
   },
   plugins: [],
 }
